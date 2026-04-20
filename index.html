@@ -52,7 +52,7 @@
     .section-title-light { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 2rem; }
 
     /* Diensten Grid */
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e0e0e0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #e0e0e0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
     .service-card { background: #fff; padding: 1.5rem; transition: background 0.15s; }
     .service-card:hover { background: #faf8f4; }
     .service-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
@@ -75,7 +75,7 @@
     .hours-table tr { border-bottom: 1px solid #e8e8e8; }
     .hours-table td { padding: 11px 0; font-size: 14px; color: var(--text); }
     .hours-table td:last-child { text-align: right; font-weight: 600; }
-    .hours-table .closed { color: #bbb; font-weight: 400; }
+    .hours-table tr.closed td { color: #bbb; font-weight: 400; }
     .contact-detail { display: flex; flex-direction: column; gap: 18px; }
     .cd-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; font-weight: 600; display: block; }
     .cd-value { font-size: 14px; color: var(--text); }
@@ -90,8 +90,9 @@
     .fl { font-size: 11px; color: var(--muted); margin-bottom: 5px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; display: block; }
     .fi { width: 100%; padding: 11px 14px; font-size: 14px; border: 1px solid #ddd; border-radius: 4px; background: #fff; color: var(--dark); font-family: inherit; }
     .fi:focus { outline: none; border-color: var(--gold); }
-    .submit-btn { width: 100%; padding: 15px; background: var(--gold); color: var(--dark); border: none; border-radius: 4px; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+    .submit-btn { width: 100%; padding: 15px; background: var(--gold); color: var(--dark); border: none; border-radius: 4px; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
     .submit-btn:hover { background: var(--gold-dark); }
+    .form-success { display: none; padding: 14px; background: #f0faf0; border: 1px solid #c3e6cb; border-radius: 4px; color: #2d6a4f; font-size: 14px; margin-top: 12px; text-align: center; }
 
     footer { background: #111; padding: 2rem; text-align: center; }
     footer p { font-size: 12px; color: #555; }
@@ -104,6 +105,7 @@
       .hero-visual { display: none; }
       .services-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; }
       .info-split { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       section { padding: 3rem 1.5rem; }
@@ -122,7 +124,7 @@
     </div>
   </nav>
 
-  <header class="hero">
+  <div class="hero">
     <div>
       <h1>Meer dan<br>alleen een<br><span>knipbeurt</span></h1>
       <p>Homerus Hairsalon combineert vakmanschap met een moderne sfeer. Kom langs en voel het verschil.</p>
@@ -136,7 +138,7 @@
       <div class="hero-img">foto</div>
       <div class="hero-img">foto</div>
     </div>
-  </header>
+  </div>
 
   <div class="strip">
     <span class="strip-item">Vakkundige kappers</span>
@@ -154,25 +156,16 @@
         <div class="service-desc">Wassen, knippen &amp; stylen</div>
       </div>
       <div class="service-card">
-        <div class="service-top"><span class="service-name">Knippen heren incl. baard</span><span class="service-price">€30</span></div>
+        <div class="service-top"><span class="service-name">Knippen heren incl. baard</span><span class="service-price">€30,–</span></div>
         <div class="service-desc">Wassen, knippen, stylen &amp; baard</div>
-      </div>
-      <div class="service-card">
-        <div class="service-top"><span class="service-name">Knippen dames</span><span class="service-price">€35</span></div>
-        <div class="service-desc">Wassen, knippen &amp; föhnen</div>
       </div>
       <div class="service-card">
         <div class="service-top"><span class="service-name">Knippen kind</span><span class="service-price">€17,50</span></div>
         <div class="service-desc">Tot 12 jaar</div>
       </div>
       <div class="service-card">
-        <div class="service-top"><span class="service-name">Verven</span><span class="service-price">€55</span></div>
-        <div class="service-desc">Enkele kleur, incl. knippen</div>
-      </div>
-      <div class="service-card">
-        <div class="service-top"><span class="service-name">Highlights</span><span class="service-price">€65</span></div>
-        <div class="service-desc">Gedeeltelijk of volledig</div>
-        <span class="badge">Meest gekozen</span>
+        <div class="service-top"><span class="service-name">Baard trimmen &amp; stylen</span><span class="service-price">€15,–</span></div>
+        <div class="service-desc">Bijwerken, trimmen &amp; in model brengen</div>
       </div>
     </div>
   </section>
@@ -182,10 +175,10 @@
     <h2 class="section-title-light">Galerij</h2>
     <div class="gallery-grid">
       <div class="gallery-item">foto<span class="gallery-tag">Heren</span></div>
-      <div class="gallery-item">foto<span class="gallery-tag">Kleur</span></div>
-      <div class="gallery-item">foto<span class="gallery-tag">Dames</span></div>
       <div class="gallery-item">foto<span class="gallery-tag">Baard</span></div>
-      <div class="gallery-item">foto<span class="gallery-tag">Highlights</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Knippen</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Stylen</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Kind</span></div>
     </div>
   </section>
 
@@ -195,7 +188,7 @@
     <div class="info-split">
       <table class="hours-table">
         <tr><td>Maandag</td><td>11:00 – 18:00</td></tr>
-        <tr><td>Dinsdag</td><td class="closed">Gesloten</td></tr>
+        <tr class="closed"><td>Dinsdag</td><td>Gesloten</td></tr>
         <tr><td>Woensdag</td><td>09:00 – 18:00</td></tr>
         <tr><td>Donderdag</td><td>09:00 – 19:00</td></tr>
         <tr><td>Vrijdag</td><td>09:00 – 18:30</td></tr>
@@ -217,25 +210,28 @@
       <h2 class="section-title">Maak een afspraak</h2>
       <p class="booking-sub">Vul het formulier in — we bevestigen zo snel mogelijk</p>
       
-      <form action="#">
+      <form method="post" action="#" id="bookingForm">
         <div class="form-grid">
-          <div><label class="fl">Naam</label><input class="fi" type="text" placeholder="Jouw naam" required></div>
-          <div><label class="fl">Telefoon</label><input class="fi" type="tel" placeholder="06 – …" required></div>
+          <div><label class="fl" for="naam">Naam</label><input class="fi" id="naam" type="text" placeholder="Jouw naam" required></div>
+          <div><label class="fl" for="telefoon">Telefoon</label><input class="fi" id="telefoon" type="tel" placeholder="06 – …" required></div>
           <div>
-            <label class="fl">Dienst</label>
-            <select class="fi">
-              <option>Knippen heren – €23,50</option>
-              <option>Knippen heren incl. baard – €30</option>
-              <option>Knippen kind – €17,50</option>
+            <label class="fl" for="dienst">Dienst</label>
+            <select class="fi" id="dienst" required>
+              <option value="">Kies een dienst…</option>
+              <option value="knippen-heren">Knippen heren – €23,50</option>
+              <option value="knippen-heren-baard">Knippen heren incl. baard – €30,–</option>
+              <option value="knippen-kind">Knippen kind – €17,50</option>
+              <option value="baard-trimmen">Baard trimmen &amp; stylen – €15,–</option>
             </select>
           </div>
-          <div><label class="fl">Datum</label><input class="fi" type="date" required></div>
+          <div><label class="fl" for="datum">Datum</label><input class="fi" id="datum" type="date" required></div>
         </div>
         <div class="form-full">
-          <label class="fl">Opmerking (optioneel)</label>
-          <textarea class="fi" rows="3" placeholder="Bijv. voorkeur voor een bepaalde kapper…" style="resize:vertical"></textarea>
+          <label class="fl" for="opmerking">Opmerking (optioneel)</label>
+          <textarea class="fi" id="opmerking" rows="3" placeholder="Bijv. voorkeur voor een bepaalde kapper…" style="resize:vertical"></textarea>
         </div>
         <button type="submit" class="submit-btn">Afspraak bevestigen</button>
+        <div class="form-success" id="formSuccess">✓ Bedankt! We nemen zo snel mogelijk contact met je op.</div>
       </form>
     </div>
   </section>
@@ -243,6 +239,14 @@
   <footer>
     <p>&copy; 2026 <span>Homerus Hairsalon</span> &nbsp;·&nbsp; Alle rechten voorbehouden</p>
   </footer>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+      document.getElementById('formSuccess').style.display = 'block';
+    });
+  </script>
 
 </body>
 </html>
