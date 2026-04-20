@@ -6,33 +6,52 @@
   <title>Homerus Hairsalon</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --gold: #C9A96E; --gold-dark: #b8956a; --dark: #1a1a1a; --dark2: #2a2a2a; --light: #f8f6f2; --text: #333; --muted: #888; }
+    :root { 
+      --gold: #C9A96E; 
+      --gold-dark: #b8956a; 
+      --dark: #1a1a1a; 
+      --dark2: #2a2a2a; 
+      --light: #f8f6f2; 
+      --text: #333; 
+      --muted: #888; 
+    }
     html { scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--dark); background: #fff; }
+    
+    /* Navigatie */
     nav { position: sticky; top: 0; z-index: 100; background: var(--dark); display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; }
     .nav-logo { color: #fff; font-size: 16px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
     .nav-links { display: flex; gap: 1.75rem; }
     .nav-links a { color: #aaa; font-size: 12px; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--gold); }
+
+    /* Hero Sectie */
     .hero { background: var(--dark); display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding: 5rem 2.5rem 4rem; align-items: center; }
     .hero h1 { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
     .hero h1 span { color: var(--gold); }
     .hero p { color: #999; font-size: 15px; line-height: 1.75; max-width: 360px; margin-bottom: 2rem; }
     .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    
     .btn-gold { background: var(--gold); color: var(--dark); border: none; padding: 13px 28px; font-size: 13px; font-weight: 600; border-radius: 3px; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: background 0.2s; }
     .btn-gold:hover { background: var(--gold-dark); }
     .btn-outline { background: transparent; color: #fff; border: 1px solid #444; padding: 13px 28px; font-size: 13px; border-radius: 3px; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.2s; }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
     .hero-visual { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; height: 360px; }
     .hero-img { background: var(--dark2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #444; }
     .hero-img.tall { grid-row: span 2; }
+
+    /* Features Strip */
     .strip { background: var(--gold); display: flex; justify-content: center; gap: 3rem; padding: 1rem 2.5rem; flex-wrap: wrap; }
     .strip-item { font-size: 12px; font-weight: 600; color: var(--dark); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Algemene Secties */
     section { padding: 4rem 2.5rem; }
     .section-label { font-size: 11px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; display: block; }
     .section-title { font-size: 32px; font-weight: 700; color: var(--dark); margin-bottom: 2rem; }
     .section-title-light { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 2rem; }
-    #diensten { background: #fff; }
+
+    /* Diensten Grid */
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e0e0e0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
     .service-card { background: #fff; padding: 1.5rem; transition: background 0.15s; }
     .service-card:hover { background: #faf8f4; }
@@ -41,11 +60,15 @@
     .service-price { font-size: 18px; font-weight: 700; color: var(--gold); }
     .service-desc { font-size: 13px; color: var(--muted); }
     .badge { display: inline-block; font-size: 10px; background: #fdf3e3; color: #b8860b; padding: 3px 8px; border-radius: 2px; margin-top: 8px; font-weight: 600; }
+
+    /* Galerij */
     #galerij { background: var(--dark); }
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .gallery-item { background: var(--dark2); border-radius: 4px; aspect-ratio: 4/5; position: relative; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #444; }
     .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
     .gallery-tag { position: absolute; bottom: 10px; left: 12px; font-size: 10px; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+
+    /* Contact & Info */
     #contact { background: var(--light); }
     .info-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
     .hours-table { width: 100%; border-collapse: collapse; }
@@ -57,6 +80,8 @@
     .cd-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; font-weight: 600; display: block; }
     .cd-value { font-size: 14px; color: var(--text); }
     .cd-value a { color: var(--gold); text-decoration: none; }
+
+    /* Boeking Formulier */
     #afspraak { background: #fff; }
     .booking-inner { max-width: 560px; margin: 0 auto; text-align: center; }
     .booking-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
@@ -67,9 +92,12 @@
     .fi:focus { outline: none; border-color: var(--gold); }
     .submit-btn { width: 100%; padding: 15px; background: var(--gold); color: var(--dark); border: none; border-radius: 4px; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
     .submit-btn:hover { background: var(--gold-dark); }
+
     footer { background: #111; padding: 2rem; text-align: center; }
     footer p { font-size: 12px; color: #555; }
     footer span { color: var(--gold); }
+
+    /* Mobiel */
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
       .hero h1 { font-size: 36px; }
@@ -83,109 +111,141 @@
   </style>
 </head>
 <body>
-<nav>
-  <a class="nav-logo" href="#">Homerus Hairsalon</a>
-  <div class="nav-links">
-    <a href="#diensten">Diensten</a>
-    <a href="#galerij">Galerij</a>
-    <a href="#contact">Contact</a>
-    <a href="#afspraak">Afspraak</a>
-  </div>
-</nav>
-<div class="hero">
-  <div>
-    <h1>Meer dan<br>alleen een<br><span>knipbeurt</span></h1>
-    <p>Homerus Hairsalon combineert vakmanschap met een moderne sfeer. Kom langs en voel het verschil.</p>
-    <div class="hero-btns">
-      <a class="btn-gold" href="#afspraak">Maak een afspraak</a>
-      <a class="btn-outline" href="#diensten">Bekijk diensten</a>
+
+  <nav>
+    <a class="nav-logo" href="#">Homerus Hairsalon</a>
+    <div class="nav-links">
+      <a href="#diensten">Diensten</a>
+      <a href="#galerij">Galerij</a>
+      <a href="#contact">Contact</a>
+      <a href="#afspraak">Afspraak</a>
     </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-img tall">foto</div>
-    <div class="hero-img">foto</div>
-    <div class="hero-img">foto</div>
-  </div>
-</div>
-<div class="strip">
-  <span class="strip-item">Vakkundige kappers</span>
-  <span class="strip-item">Geen wachtrijen</span>
-  <span class="strip-item">Online afspraak</span>
-  <span class="strip-item">Alle haartypes</span>
-</div>
-<section id="diensten">
-  <span class="section-label">Wat wij bieden</span>
-  <div class="section-title">Diensten &amp; prijzen</div>
-  <div class="services-grid">
-    <div class="service-card"><div class="service-top"><span class="service-name">Knippen heren</span><span class="service-price">€20</span></div><div class="service-desc">Wassen, knippen &amp; stylen</div></div>
-    <div class="service-card"><div class="service-top"><span class="service-name">Knippen dames</span><span class="service-price">€35</span></div><div class="service-desc">Wassen, knippen &amp; föhnen</div></div>
-    <div class="service-card"><div class="service-top"><span class="service-name">Knippen kind</span><span class="service-price">€15</span></div><div class="service-desc">Tot 12 jaar</div></div>
-    <div class="service-card"><div class="service-top"><span class="service-name">Verven</span><span class="service-price">€55</span></div><div class="service-desc">Enkele kleur, incl. knippen</div></div>
-    <div class="service-card"><div class="service-top"><span class="service-name">Highlights</span><span class="service-price">€65</span></div><div class="service-desc">Gedeeltelijk of volledig</div><span class="badge">Meest gekozen</span></div>
-    <div class="service-card"><div class="service-top"><span class="service-name">Baard trimmen</span><span class="service-price">€12</span></div><div class="service-desc">Incl. verzorging &amp; shaping</div></div>
-  </div>
-</section>
-<section id="galerij">
-  <span class="section-label">Ons werk</span>
-  <div class="section-title-light">Galerij</div>
-  <div class="gallery-grid">
-    <div class="gallery-item">foto<span class="gallery-tag">Heren</span></div>
-    <div class="gallery-item">foto<span class="gallery-tag">Kleur</span></div>
-    <div class="gallery-item">foto<span class="gallery-tag">Dames</span></div>
-    <div class="gallery-item">foto<span class="gallery-tag">Baard</span></div>
-    <div class="gallery-item">foto<span class="gallery-tag">Highlights</span></div>
-  </div>
-</section>
-<section id="contact">
-  <span class="section-label">Bezoek ons</span>
-  <div class="section-title">Openingstijden &amp; contact</div>
-  <div class="info-split">
-    <table class="hours-table">
-  <tr><td>Maandag</td><td>11:00 – 18:00</td></tr>
-  <tr><td>Dinsdag</td><td class="closed">Gesloten</td></tr>
-  <tr><td>Woensdag</td><td>09:00 – 18:00</td></tr>
-  <tr><td>Donderdag</td><td>09:00 – 19:00</td></tr>
-  <tr><td>Vrijdag</td><td>09:00 – 18:30</td></tr>
-  <tr><td>Zaterdag</td><td>09:00 – 18:30</td></tr>
-  <tr><td>Zondag</td><td>10:00 – 18:00</td></tr>
-</table>
-    <div class="contact-detail">
-      <div><span class="cd-label">Adres</span><div class="cd-value">Alseïdenstraat 20, 1363 SR Almere</div></div>
-      <div><span class="cd-label">Telefoon</span><div class="cd-value"><a href="tel:0684064815">06 84064815</a></div></div>
-      <div><span class="cd-label">E-mail</span><div class="cd-value"><a href="mailto:info@homerus-hairsalon.nl">info@homerus-hairsalon.nl</a></div></div>
-      <div><span class="cd-label">Instagram</span><div class="cd-value">@homerus.hairsalon</div></div>
-    </div>
-  </div>
-</section>
-<section id="afspraak">
-  <div class="booking-inner">
-    <span class="section-label">Reserveer online</span>
-    <div class="section-title">Maak een afspraak</div>
-    <p class="booking-sub">Vul het formulier in — we bevestigen zo snel mogelijk</p>
-    <div class="form-grid">
-      <div><label class="fl">Naam</label><input class="fi" type="text" placeholder="Jouw naam"></div>
-      <div><label class="fl">Telefoon</label><input class="fi" type="tel" placeholder="06 – …"></div>
-      <div><label class="fl">Dienst</label>
-        <select class="fi">
-          <option>Knippen heren – €20</option>
-          <option>Knippen dames – €35</option>
-          <option>Knippen kind – €15</option>
-          <option>Verven – €55</option>
-          <option>Highlights – €65</option>
-          <option>Baard trimmen – €12</option>
-        </select>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>Meer dan<br>alleen een<br><span>knipbeurt</span></h1>
+      <p>Homerus Hairsalon combineert vakmanschap met een moderne sfeer. Kom langs en voel het verschil.</p>
+      <div class="hero-btns">
+        <a class="btn-gold" href="#afspraak">Maak een afspraak</a>
+        <a class="btn-outline" href="#diensten">Bekijk diensten</a>
       </div>
-      <div><label class="fl">Datum</label><input class="fi" type="date"></div>
     </div>
-    <div class="form-full">
-      <label class="fl">Opmerking (optioneel)</label>
-      <textarea class="fi" rows="3" placeholder="Bijv. voorkeur voor een bepaalde kapper…" style="resize:vertical"></textarea>
+    <div class="hero-visual">
+      <div class="hero-img tall">foto</div>
+      <div class="hero-img">foto</div>
+      <div class="hero-img">foto</div>
     </div>
-    <button class="submit-btn">Afspraak bevestigen</button>
+  </header>
+
+  <div class="strip">
+    <span class="strip-item">Vakkundige kappers</span>
+    <span class="strip-item">Geen wachtrijen</span>
+    <span class="strip-item">Online afspraak</span>
+    <span class="strip-item">Alle haartypes</span>
   </div>
-</section>
-<footer>
-  <p>&copy; 2026 <span>Homerus Hairsalon</span> &nbsp;·&nbsp; Alle rechten voorbehouden</p>
-</footer>
+
+  <section id="diensten">
+    <span class="section-label">Wat wij bieden</span>
+    <h2 class="section-title">Diensten &amp; prijzen</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Knippen heren</span><span class="service-price">€23,50</span></div>
+        <div class="service-desc">Wassen, knippen &amp; stylen</div>
+      </div>
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Knippen heren incl. baard</span><span class="service-price">€30</span></div>
+        <div class="service-desc">Wassen, knippen, stylen &amp; baard</div>
+      </div>
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Knippen dames</span><span class="service-price">€35</span></div>
+        <div class="service-desc">Wassen, knippen &amp; föhnen</div>
+      </div>
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Knippen kind</span><span class="service-price">€17,50</span></div>
+        <div class="service-desc">Tot 12 jaar</div>
+      </div>
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Verven</span><span class="service-price">€55</span></div>
+        <div class="service-desc">Enkele kleur, incl. knippen</div>
+      </div>
+      <div class="service-card">
+        <div class="service-top"><span class="service-name">Highlights</span><span class="service-price">€65</span></div>
+        <div class="service-desc">Gedeeltelijk of volledig</div>
+        <span class="badge">Meest gekozen</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerij">
+    <span class="section-label">Ons werk</span>
+    <h2 class="section-title-light">Galerij</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">foto<span class="gallery-tag">Heren</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Kleur</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Dames</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Baard</span></div>
+      <div class="gallery-item">foto<span class="gallery-tag">Highlights</span></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <span class="section-label">Bezoek ons</span>
+    <h2 class="section-title">Openingstijden &amp; contact</h2>
+    <div class="info-split">
+      <table class="hours-table">
+        <tr><td>Maandag</td><td>11:00 – 18:00</td></tr>
+        <tr><td>Dinsdag</td><td class="closed">Gesloten</td></tr>
+        <tr><td>Woensdag</td><td>09:00 – 18:00</td></tr>
+        <tr><td>Donderdag</td><td>09:00 – 19:00</td></tr>
+        <tr><td>Vrijdag</td><td>09:00 – 18:30</td></tr>
+        <tr><td>Zaterdag</td><td>09:00 – 18:30</td></tr>
+        <tr><td>Zondag</td><td>10:00 – 18:00</td></tr>
+      </table>
+      <div class="contact-detail">
+        <div><span class="cd-label">Adres</span><div class="cd-value">Alseïdenstraat 20, 1363 SR Almere</div></div>
+        <div><span class="cd-label">Telefoon</span><div class="cd-value"><a href="tel:0684064815">06 84064815</a></div></div>
+        <div><span class="cd-label">E-mail</span><div class="cd-value"><a href="mailto:info@homerus-hairsalon.nl">info@homerus-hairsalon.nl</a></div></div>
+        <div><span class="cd-label">Instagram</span><div class="cd-value">@homerus.hairsalon</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="afspraak">
+    <div class="booking-inner">
+      <span class="section-label">Reserveer online</span>
+      <h2 class="section-title">Maak een afspraak</h2>
+      <p class="booking-sub">Vul het formulier in — we bevestigen zo snel mogelijk</p>
+      
+      <form action="#">
+        <div class="form-grid">
+          <div><label class="fl">Naam</label><input class="fi" type="text" placeholder="Jouw naam" required></div>
+          <div><label class="fl">Telefoon</label><input class="fi" type="tel" placeholder="06 – …" required></div>
+          <div>
+            <label class="fl">Dienst</label>
+            <select class="fi">
+              <option>Knippen heren – €23,50</option>
+              <option>Knippen heren incl. baard – €30</option>
+              <option>Knippen dames – €35</option>
+              <option>Knippen kind – €17,50</option>
+              <option>Verven – €55</option>
+              <option>Highlights – €65</option>
+            </select>
+          </div>
+          <div><label class="fl">Datum</label><input class="fi" type="date" required></div>
+        </div>
+        <div class="form-full">
+          <label class="fl">Opmerking (optioneel)</label>
+          <textarea class="fi" rows="3" placeholder="Bijv. voorkeur voor een bepaalde kapper…" style="resize:vertical"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Afspraak bevestigen</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 <span>Homerus Hairsalon</span> &nbsp;·&nbsp; Alle rechten voorbehouden</p>
+  </footer>
+
 </body>
 </html>
