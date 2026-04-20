@@ -142,7 +142,7 @@
   </div>
 
   <div class="strip">
-    <span class="strip-item">Vakkundige kappers</span>
+    <span class="strip-item">Vakkundige kapper Mevan</span>
     <span class="strip-item">Geen wachtrijen</span>
     <span class="strip-item">Online afspraak</span>
     <span class="strip-item">Alle haartypes</span>
@@ -175,93 +175,76 @@
   <section id="reviews" style="background:var(--light);padding:4rem 2.5rem;">
     <span class="section-label">Wat klanten zeggen</span>
     <h2 class="section-title">Reviews</h2>
+    <div id="reviews-summary" style="text-align:center;"></div>
     <div id="reviews-container" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-      <div style="background:#fff;border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px;">Reviews laden...</div>
+      <div style="background:#fff;border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:center;color:#888;font-size:13px;">Reviews laden…</div>
     </div>
-    <p id="reviews-error" style="display:none;color:#888;font-size:13px;margin-top:1rem;"></p>
   </section>
 
+  <!-- Google Maps Places API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-placeholder&libraries=places" async defer onload="loadReviews()"></script>
   <script>
-  (function() {
-    const PLACE_ID = 'ChIJQ_HYj50RxkcRV-lvRRYRNBQ';
-    
-    function renderStars(rating) {
-      const full = Math.floor(rating);
-      const half = rating % 1 >= 0.5;
-      let s = '';
-      for (let i = 0; i < 5; i++) {
-        if (i < full) s += '<span style="color:#C9A96E;">&#9733;</span>';
-        else if (i === full && half) s += '<span style="color:#C9A96E;">&#9734;</span>';
-        else s += '<span style="color:#ddd;">&#9733;</span>';
-      }
-      return s;
+  function renderStars(rating) {
+    let s = '';
+    for (let i = 1; i <= 5; i++) {
+      s += i <= rating
+        ? '<span style="color:#C9A96E;font-size:16px;">&#9733;</span>'
+        : '<span style="color:#ddd;font-size:16px;">&#9733;</span>';
     }
+    return s;
+  }
 
-    function timeAgo(unixTime) {
-      const secs = Math.floor(Date.now() / 1000) - unixTime;
-      if (secs < 3600) return Math.floor(secs/60) + ' minuten geleden';
-      if (secs < 86400) return Math.floor(secs/3600) + ' uur geleden';
-      if (secs < 2592000) return Math.floor(secs/86400) + ' dagen geleden';
-      if (secs < 31536000) return Math.floor(secs/2592000) + ' maanden geleden';
-      return Math.floor(secs/31536000) + ' jaar geleden';
-    }
+  function timeAgo(unixTime) {
+    const secs = Math.floor(Date.now() / 1000) - unixTime;
+    if (secs < 3600) return Math.floor(secs/60) + ' minuten geleden';
+    if (secs < 86400) return Math.floor(secs/3600) + ' uur geleden';
+    if (secs < 2592000) return Math.floor(secs/86400) + ' dagen geleden';
+    if (secs < 31536000) return Math.floor(secs/2592000) + ' maanden geleden';
+    return Math.floor(secs/31536000) + ' jaar geleden';
+  }
 
-    async function loadReviews() {
-      const container = document.getElementById('reviews-container');
-      const errEl = document.getElementById('reviews-error');
-      try {
-        // Use Places API via a CORS-friendly approach with fields
-        const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews,rating,user_ratings_total&key=AIzaSyD-placeholder&language=nl`;
-        // Since we can't use server-side key securely in frontend, use the embed widget approach
-        // Fall back to a nice static placeholder with a link
-        container.innerHTML = \`
-          <div style="grid-column:1/-1;text-align:center;padding:2rem 0;">
-            <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:1rem;">
-              <span style="font-size:36px;font-weight:700;color:var(--dark);">5.0</span>
-              <div>
-                <div>\${renderStars(5)}</div>
-                <div style="font-size:12px;color:#888;margin-top:2px;">Gebaseerd op Google Reviews</div>
-              </div>
-            </div>
-            <br>
-            <a href="https://www.google.com/maps/place/?q=place_id:${PLACE_ID}" target="_blank" rel="noopener" style="display:inline-block;background:var(--gold);color:var(--dark);padding:10px 24px;border-radius:3px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;margin-top:1rem;">Bekijk alle reviews op Google</a>
-          </div>
-        \`;
-
-        // Try to load via Google Places JS API if available
-        if (typeof google !== 'undefined' && google.maps && google.maps.places) {
-          loadWithPlacesAPI(container);
+  function loadReviews() {
+    const container = document.getElementById('reviews-container');
+    const service = new google.maps.places.PlacesService(document.createElement('div'));
+    service.getDetails(
+      { placeId: 'ChIJQ_HYj50RxkcRV-lvRRYRNBQ', fields: ['reviews', 'rating', 'user_ratings_total'], language: 'nl' },
+      function(place, status) {
+        if (status !== google.maps.places.PlacesServiceStatus.OK || !place || !place.reviews) {
+          container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#888;font-size:13px;padding:2rem;">Reviews konden niet worden geladen. <a href="https://www.google.com/maps/place/?q=place_id:ChIJQ_HYj50RxkcRV-lvRRYRNBQ" target="_blank" style="color:var(--gold);">Bekijk op Google Maps</a></div>';
+          return;
         }
-      } catch(e) {
-        errEl.style.display = 'block';
-        errEl.textContent = 'Reviews konden niet worden geladen.';
-      }
-    }
 
-    function loadWithPlacesAPI(container) {
-      const service = new google.maps.places.PlacesService(document.createElement('div'));
-      service.getDetails({ placeId: 'ChIJQ_HYj50RxkcRV-lvRRYRNBQ', fields: ['reviews','rating','user_ratings_total'], language: 'nl' }, function(place, status) {
-        if (status !== 'OK' || !place.reviews) return;
-        const reviews = place.reviews.slice(0, 6);
-        container.style.gridTemplateColumns = reviews.length <= 3 ? 'repeat(' + reviews.length + ',1fr)' : 'repeat(3,1fr)';
-        container.innerHTML = reviews.map(r => \`
-          <div style="background:#fff;border-radius:6px;padding:1.5rem;border:1px solid #ebe9e4;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-              <img src="\${r.profile_photo_url}" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">
+        // Summary bar
+        const summary = document.getElementById('reviews-summary');
+        if (summary) {
+          summary.innerHTML = `
+            <div style="display:inline-flex;align-items:center;gap:14px;background:#fff;padding:16px 28px;border-radius:6px;border:1px solid #ebe9e4;margin-bottom:2rem;">
+              <span style="font-size:42px;font-weight:700;color:var(--dark);line-height:1;">${place.rating.toFixed(1)}</span>
               <div>
-                <div style="font-size:13px;font-weight:600;">\${r.author_name}</div>
-                <div style="font-size:11px;color:#888;">\${timeAgo(r.time)}</div>
+                <div>${renderStars(Math.round(place.rating))}</div>
+                <div style="font-size:12px;color:#888;margin-top:4px;">${place.user_ratings_total} reviews op Google</div>
+              </div>
+            </div>`;
+        }
+
+        const reviews = place.reviews.slice(0, 6);
+        container.style.gridTemplateColumns = window.innerWidth < 768 ? '1fr' : 'repeat(3,1fr)';
+        container.innerHTML = reviews.map(r => `
+          <div style="background:#fff;border-radius:6px;padding:1.5rem;border:1px solid #ebe9e4;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <img src="${r.profile_photo_url}" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">
+              <div>
+                <div style="font-size:13px;font-weight:600;color:var(--dark);">${r.author_name}</div>
+                <div style="font-size:11px;color:#aaa;">${timeAgo(r.time)}</div>
               </div>
             </div>
-            <div style="margin-bottom:8px;">\${renderStars(r.rating)}</div>
-            <p style="font-size:13px;color:#555;line-height:1.6;">\${r.text ? r.text.slice(0,200) + (r.text.length > 200 ? '…' : '') : ''}</p>
+            <div>${renderStars(r.rating)}</div>
+            ${r.text ? `<p style="font-size:13px;color:#666;line-height:1.6;margin:0;">${r.text.length > 220 ? r.text.slice(0,220) + '…' : r.text}</p>` : ''}
           </div>
-        \`).join('');
-      });
-    }
-
-    loadReviews();
-  })();
+        `).join('');
+      }
+    );
+  }
   </script>
 
   <section id="galerij">
@@ -281,13 +264,13 @@
     <h2 class="section-title">Openingstijden &amp; contact</h2>
     <div class="info-split">
       <table class="hours-table">
-        <tr><td>Maandag</td><td>11:00 – 18:00</td></tr>
+        <tr><td>Maandag</td><td>10:00 – 19:00</td></tr>
         <tr class="closed"><td>Dinsdag</td><td>Gesloten</td></tr>
-        <tr><td>Woensdag</td><td>09:00 – 18:00</td></tr>
-        <tr><td>Donderdag</td><td>09:00 – 19:00</td></tr>
-        <tr><td>Vrijdag</td><td>09:00 – 18:30</td></tr>
-        <tr><td>Zaterdag</td><td>09:00 – 18:30</td></tr>
-        <tr><td>Zondag</td><td>10:00 – 18:00</td></tr>
+        <tr><td>Woensdag</td><td>09:00 – 17:00</td></tr>
+        <tr><td>Donderdag</td><td>09:00 – 17:00</td></tr>
+        <tr><td>Vrijdag</td><td>09:00 – 17:00</td></tr>
+        <tr><td>Zaterdag</td><td>09:00 – 17:00</td></tr>
+        <tr><td>Zondag</td><td>10:00 – 19:00</td></tr>
       </table>
       <div class="contact-detail">
         <div><span class="cd-label">Adres</span><div class="cd-value"><a href="https://maps.google.com/?q=Alse%C3%AFdenstraat+20,+1363+SR+Almere" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Alseïdenstraat 20, 1363 SR Almere</a></div></div>
